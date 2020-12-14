@@ -102,3 +102,34 @@ LOAD TABLE DATA - ON PAGE LOAD
 ****************************************************/
 // Load table data on page load
 loadTableData(tableData);
+
+/***************************************************
+LOAD SHAPE & COUNTRY DROP DOWN - ON PAGE LOAD
+****************************************************/
+// Create a array of unique shapes from the table data
+var shapes = tableData.map(function(ufoSightings) {
+    return ufoSightings.shape;
+});
+console.log(shapes);
+var unique_shapes = d3.set(shapes).values();
+console.log(unique_shapes);
+
+// Load the Shape dropdown list
+unique_shapes.forEach(shape => {
+    var cell = shapeDropDown.append("option");
+    cell.property("value", shape).text(shape);
+});
+
+// Create a array of unique countries from the table data
+var countries = tableData.map(function(ufoSightings) {
+    return ufoSightings.country;
+});
+console.log(countries);
+var unique_countries = d3.set(countries).values();
+console.log(unique_countries);
+
+// Load the Country dropdown list
+unique_countries.forEach(country => {
+    var cell = countryDropDown.append("option");
+    cell.property("value", country).text(country);
+});
