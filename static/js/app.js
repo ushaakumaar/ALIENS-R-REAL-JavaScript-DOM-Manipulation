@@ -49,6 +49,7 @@ function loadTableData(ufoSightingsArray) {
 };
 
 // function to complete the event handler function for the filter button
+// filter data based on the search criteria provided by user
 function filterData() {
 
     // Prevent the page from refreshing
