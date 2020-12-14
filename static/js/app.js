@@ -169,3 +169,41 @@ inputDate.on("change", function() {
         dateErrorPTag.text(``);
     }
 });
+
+// Country Event Handler - Disable/Enable & load State dropdown
+countryDropDown.on("change", function() {
+    var selectedCountry = this.value;
+    if (selectedCountry != "") {
+        // Enable State dropdown
+        stateDropDown.attr("disabled", null).style("background", null);
+
+        /*******************************************
+        Load State dropdown
+        *******************************************/
+
+        // filter table data based on specified country
+        var countryFilteredData = tableData.filter(ufoSighting => ufoSighting.country === selectedCountry);
+
+        // create a array of unique states for the specified country from the table data
+        var states = countryFilteredData.map(function(ufoSightings) {
+            return ufoSightings.state;
+        });
+        console.log(states);
+        var unique_states = d3.set(states).values();
+        console.log(unique_states);
+
+        // sort the states in ascending
+        unique_states.sort(d3.ascending)
+
+        // Load the State dropdown list
+        stateDropDown.html("");
+        stateDropDown.append("option").property("value", "").text("Select a State");
+        unique_states.forEach(state => {
+            var cell = stateDropDown.append("option");
+            cell.property("value", state).text(state);
+        });
+    } else {
+        // Disable State dropdown
+        stateDropDown.attr("disabled", "disabled").style("background", "gray");
+    }
+});
