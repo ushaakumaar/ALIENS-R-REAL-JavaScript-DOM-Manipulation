@@ -5,7 +5,9 @@ This is a project that requires creating a basic HTML [web page](https://ushaaku
 ## Programming Language / Applications - Used
 
   * HTML
-  * D3.JS, DOM Manipulation
+  * JavaScript
+    - D3.js
+    - DOM Manipulation
   * CSS
     - Bootstrap
 
