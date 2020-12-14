@@ -133,3 +133,11 @@ unique_countries.forEach(country => {
     var cell = countryDropDown.append("option");
     cell.property("value", country).text(country);
 });
+
+/***************************************************
+EVENT HANDLERS
+****************************************************/
+
+// Filter Button event handlers 
+button.on("click", filterData);
+form.on("submit", filterData);
