@@ -25,3 +25,25 @@ var clearButton = d3.select("#clear-filter-btn");
 
 // Select the form
 var form = d3.select("form");
+
+/***************************************************
+USER DEFINED FUNCTIONS
+****************************************************/
+
+// function to load table data
+function loadTableData(ufoSightingsArray) {
+    if (ufoSightingsArray.length === 0) {
+        var row = tableBody.append("tr");
+        var cell = row.append("td");
+        cell.attr("colspan", "7");
+        cell.text("No UFO Sightings match the provided search criteria!!");
+    } else {
+        ufoSightingsArray.forEach((ufoSighting) => {
+            var row = tableBody.append("tr");
+            Object.entries(ufoSighting).forEach(([key, value]) => {
+                var cell = row.append("td");
+                cell.text(value);
+            });
+        })
+    }
+};
