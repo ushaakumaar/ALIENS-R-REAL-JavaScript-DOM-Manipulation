@@ -141,3 +141,16 @@ EVENT HANDLERS
 // Filter Button event handlers 
 button.on("click", filterData);
 form.on("submit", filterData);
+
+// Clear Button event handler
+clearButton.on("click", function() {
+    inputDate.property('value', "");
+    countryDropDown.property('value', "");
+    stateDropDown.property('value', "");
+    cityDropDown.property('value', "");
+    shapeDropDown.property('value', "");
+    // Disable State & City dropdowns
+    stateDropDown.attr("disabled", "disabled").style("background", "gray");
+    cityDropDown.attr("disabled", "disabled").style("background", "gray");
+    loadTableData(tableData);
+});
