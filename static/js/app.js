@@ -207,3 +207,43 @@ countryDropDown.on("change", function() {
         stateDropDown.attr("disabled", "disabled").style("background", "gray");
     }
 });
+
+// State Event Handler - Disable/Enable & load City dropdown
+stateDropDown.on("change", function() {
+    var selectedCountry = countryDropDown.property("value");
+    var selectedState = this.value;
+    if (selectedState != "") {
+        // Enable City dropdown
+        cityDropDown.attr("disabled", null).style("background", null);
+
+        /*******************************************
+        Load City dropdown
+        *******************************************/
+
+        // filter table data based on specified country/state
+        var countryFilteredData = tableData.filter(ufoSighting => ufoSighting.country === selectedCountry);
+        var stateFilteredData = countryFilteredData.filter(ufoSighting => ufoSighting.state === selectedState);
+
+        // create a array of unique cities for the specified country/state from the table data
+        var cities = stateFilteredData.map(function(ufoSightings) {
+            return ufoSightings.city;
+        });
+        console.log(cities);
+        var unique_cities = d3.set(cities).values();
+        console.log(unique_cities);
+
+        // sort the cities in ascending
+        unique_cities.sort(d3.ascending)
+
+        // Load the City dropdown list
+        cityDropDown.html("");
+        cityDropDown.append("option").property("value", "").text("Select a City");
+        unique_cities.forEach(city => {
+            var cell = cityDropDown.append("option");
+            cell.property("value", city).text(city);
+        });
+    } else {
+        // Disable City dropdown
+        cityDropDown.attr("disabled", "disabled").style("background", "gray");
+    }
+});
