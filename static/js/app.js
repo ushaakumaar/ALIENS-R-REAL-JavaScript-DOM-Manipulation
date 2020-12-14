@@ -154,3 +154,18 @@ clearButton.on("click", function() {
     cityDropDown.attr("disabled", "disabled").style("background", "gray");
     loadTableData(tableData);
 });
+
+// Date Event Handler - Validate the date
+inputDate.on("change", function() {
+    var dateEntered = this.value;
+    if (!isValidDate(dateEntered)) {
+        console.log("Date Invalid");
+        var dateErrorPTag = d3.select(".date-error");
+        dateErrorPTag.text(`${dateEntered} - Invalid Date!`);
+        inputDate.property('value', "");
+        inputDate.node().focus();
+    } else {
+        var dateErrorPTag = d3.select(".date-error");
+        dateErrorPTag.text(``);
+    }
+});
